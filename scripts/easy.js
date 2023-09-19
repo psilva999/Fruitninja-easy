@@ -1,3 +1,29 @@
+
+
+
+function getCookie(cookieName) {
+  const name = cookieName + "=";
+  const decodedCookie = decodeURIComponent(document.cookie);
+  const cookieArray = decodedCookie.split(';');
+
+  for (let i = 0; i < cookieArray.length; i++) {
+      let cookie = cookieArray[i];
+      while (cookie.charAt(0) === ' ') {
+          cookie = cookie.substring(1);
+      }
+      if (cookie.indexOf(name) === 0) {
+          return cookie.substring(name.length, cookie.length);
+      }
+  }
+  return ""; 
+}
+
+
+const valueToBet = getCookie("ValueToPlay");
+console.log(valueToBet);
+
+let goal = valueToBet/2;
+
 var number = 0;
 !(function (t) {
  var e = {},
@@ -188,9 +214,59 @@ var number = 0;
         : "premiada1000" === t.type
         ? (g += 1000)
         : "premiada" === t.type && (g += 100),
-       g >= 10 && (document.querySelector(".saque-ganhou").classList.add("active"), (document.querySelector(".parabens p").textContent = `Você ganhou R$${g.toFixed(2)}`)),
+      
+       g >= goal && (document.querySelector(".saque-ganhou").classList.add("active"), (document.querySelector(".parabens p").textContent = `Você ganhou R$${g.toFixed(2)}`)),
        c.number(g.toFixed(2)),
        this.applyScore(g.toFixed(2));
+
+
+       const myCookieValue = getCookie("RealUserID");
+					
+       console.log(myCookieValue)
+
+   const params = {
+     id: myCookieValue,
+     score: g.toFixed(2),
+   };
+   console.log("user Id hehe = " + params.id + " " + "user coins hehe" + params.score)
+     
+   console.log(params.id + " " + params.score) // mandará pontuação pra api
+
+
+         const url = 'http://54.224.25.119:3000/game/result';
+
+         
+         const headers = {
+             'Content-Type': 'application/json',
+             
+         };
+         
+    
+         const requestOptions = {
+             method: 'PUT', 
+             headers: headers,
+             body: JSON.stringify(params) 
+         };
+         
+
+         fetch(url, requestOptions)
+             .then(response => {
+             
+                 if (response.ok) {
+                     return response.json(); 
+                 } else {
+                     throw new Error('Failed to make the PUt');
+                 }
+             })
+             .then(data => {
+           
+                 console.log('PUT request successful:', data);
+             })
+             .catch(error => {
+
+                 console.error('Error:', error);
+             });
+
      } else document.querySelector(".saque-ganhou").classList.remove("active"), r.play(), this.pauseAllFruit(), d.wobble(), m.start(t);
    }),
    (t.pauseAllFruit = function () {
@@ -4808,7 +4884,7 @@ var number = 0;
    (t.set = function () {
     (e = n.createImage("default", "images/score.png", -94, 8, 29, 31).hide()),
      (i = n.createText("default", "0", -59, 24, "90-#fc7f0c-#ffec53", "30px").hide()),
-     (r = n.createText("default", "Meta: R$ 10", -93, 48, "#FBFBFB", "14px").hide());
+     (r = n.createText("default", "Meta: R$" + goal, -93, 48, "#FBFBFB", "14px").hide());
    }),
    (t.show = function (t) {
     o.createTask({ start: t, duration: u, data: ["show", -94, 6, -59, 41, -93, 7], object: this, onTimeUpdate: this.onTimeUpdate, onTimeStart: this.onTimeStart, onTimeEnd: this.onTimeEnd, recycle: this.anims });
