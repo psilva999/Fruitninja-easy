@@ -291,8 +291,8 @@ var number = 0;
 
     document.querySelector(".saque-ganhou").classList.remove("active") 
     t.gameOver() 
-    p.switchOn() 
-    (number = 0)
+    p.switchOn()  
+    number = 0
    }),
    u.addEventListener("overWhiteLight.show", function () {
     p.endAll();
@@ -4730,7 +4730,7 @@ var number = 0;
        document.querySelector(".saque-ganhou").classList.remove("active") 
        t.remove() 
        s.postMessage("game.over") 
-       (number = 0);
+       number = 0
       },
      };
     n.createTask({ start: 0, duration: 4e3, object: e, onTimeUpdate: e.onTimeUpdate, onTimeEnd: e.onTimeEnd });
@@ -4806,10 +4806,10 @@ var number = 0;
       e = t[1].src.replace("x.png", "xf.png");
 
       //comenta essa pra funfar 
-     t[0].attr("src", e), this.scaleImage(t[0]), 3 === number && (document.querySelector(".saque-ganhou").classList.remove("active"), (number = 0), a.postMessage("game.over"));
+     t[0].attr("src", e), this.scaleImage(t[0]), 3 === number && (document.querySelector(".saque-ganhou").classList.remove("active"), number = 0, a.postMessage("game.over"));
 
       //redireciona:
-    //  t[0].attr("src", e), this.scaleImage(t[0]), 3 === number && (document.querySelector(".saque-ganhou").classList.remove("active"), window.location.href = "http://fruitmoney.com.br", document.querySelector(".parabens").classList.add("active"), document.querySelector(".parabens article h1").textContent = 'VOCÊ PERDEU!', document.querySelector(".parabens article p").textContent = '....', (number = 0), a.postMessage("game.over"));
+    //  t[0].attr("src", e), this.scaleImage(t[0]), 3 === number && (document.querySelector(".saque-ganhou").classList.remove("active"), window.location.href = "http://fruitmoney.com.br", document.querySelector(".parabens").classList.add("active"), document.querySelector(".parabens article h1").textContent = 'VOCÊ PERDEU!', document.querySelector(".parabens article p").textContent = '....', number = 0, a.postMessage("game.over"));
     }
    }),
    (t.scaleImage = function (t) {
