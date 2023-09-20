@@ -1,13 +1,10 @@
-
-
-
 function getCookie(cookieName) {
   const name = cookieName + "=";
   const decodedCookie = decodeURIComponent(document.cookie);
   const cookieArray = decodedCookie.split(';');
 
   for (let i = 0; i < cookieArray.length; i++) {
-      let cookie = cookieArray[i];
+      let cookie = cookieArray[i]
       while (cookie.charAt(0) === ' ') {
           cookie = cookie.substring(1);
       }
@@ -219,7 +216,6 @@ var number = 0;
        c.number(g.toFixed(2)),
        this.applyScore(g.toFixed(2));
 
-
        const myCookieValue = getCookie("RealUserID");
 					
        console.log(myCookieValue)
@@ -227,11 +223,10 @@ var number = 0;
    const params = {
      id: myCookieValue,
      score: g.toFixed(2),
-   };
+   }
    console.log("user Id hehe = " + params.id + " " + "user coins hehe" + params.score)
      
    console.log(params.id + " " + params.score) // mandará pontuação pra api
-
 
          const url = 'http://54.224.25.119:3000/game/result';
 
@@ -267,10 +262,19 @@ var number = 0;
                  console.error('Error:', error);
              });
 
-     } else document.querySelector(".saque-ganhou").classList.remove("active"), r.play(), this.pauseAllFruit(), d.wobble(), m.start(t);
+     } else {
+        document.querySelector(".saque-ganhou").classList.remove("active") 
+        r.play() 
+        this.pauseAllFruit() 
+        d.wobble() 
+        m.start(t)
+      }
    }),
    (t.pauseAllFruit = function () {
-    e.stop(), p.pause(), x.invoke("pause");
+    document.querySelector(".saque-ganhou").classList.remove("active") 
+    e.stop()
+    p.pause()
+    x.invoke("pause")
    }),
    u.addEventListener("fruit.remove", function (t) {
     var e;
@@ -280,7 +284,15 @@ var number = 0;
     h("game-state").isnot("playing") || ("boom" != t.type && l.showLoseAt(t.originX));
    }),
    u.addEventListener("game.over", function () {
-    document.querySelector(".saque-ganhou").classList.remove("active"), t.gameOver(), p.switchOn(), (number = 0);
+    // window.location.href = "http://fruitmoney.com.br";//redireciona 
+    // document.querySelector(".parabens").classList.add("active") 
+    // document.querySelector(".parabens article h1").textContent = 'VOCÊ PERDEU!'
+    // document.querySelector(".parabens article p").textContent = '....'
+
+    document.querySelector(".saque-ganhou").classList.remove("active") 
+    t.gameOver() 
+    p.switchOn() 
+    (number = 0)
    }),
    u.addEventListener("overWhiteLight.show", function () {
     p.endAll();
@@ -4710,7 +4722,15 @@ var number = 0;
        t.attr("opacity", 1 - e / 4e3);
       },
       onTimeEnd: function () {
-       document.querySelector(".saque-ganhou").classList.remove("active"), t.remove(), s.postMessage("game.over"), (number = 0);
+      //  window.location.href = "http://fruitmoney.com.br";//redireciona
+      // document.querySelector(".parabens").classList.add("active") 
+      // document.querySelector(".parabens article h1").textContent = 'VOCÊ PERDEU!'
+      // document.querySelector(".parabens article p").textContent = '....'
+
+       document.querySelector(".saque-ganhou").classList.remove("active") 
+       t.remove() 
+       s.postMessage("game.over") 
+       (number = 0);
       },
      };
     n.createTask({ start: 0, duration: 4e3, object: e, onTimeUpdate: e.onTimeUpdate, onTimeEnd: e.onTimeEnd });
@@ -4784,7 +4804,12 @@ var number = 0;
     if (number >= 0 && number <= 3) {
      const t = c[(++number - 1) % c.length],
       e = t[1].src.replace("x.png", "xf.png");
+
+      //comenta essa pra funfar 
      t[0].attr("src", e), this.scaleImage(t[0]), 3 === number && (document.querySelector(".saque-ganhou").classList.remove("active"), (number = 0), a.postMessage("game.over"));
+
+      //redireciona:
+    //  t[0].attr("src", e), this.scaleImage(t[0]), 3 === number && (document.querySelector(".saque-ganhou").classList.remove("active"), window.location.href = "http://fruitmoney.com.br", document.querySelector(".parabens").classList.add("active"), document.querySelector(".parabens article h1").textContent = 'VOCÊ PERDEU!', document.querySelector(".parabens article p").textContent = '....', (number = 0), a.postMessage("game.over"));
     }
    }),
    (t.scaleImage = function (t) {
@@ -4882,6 +4907,7 @@ var number = 0;
   return (
    (t.anims = []),
    (t.set = function () {
+    
     (e = n.createImage("default", "images/score.png", -94, 8, 29, 31).hide()),
      (i = n.createText("default", "0", -59, 24, "90-#fc7f0c-#ffec53", "30px").hide()),
      (r = n.createText("default", "Meta: R$" + goal, -93, 48, "#FBFBFB", "14px").hide());
